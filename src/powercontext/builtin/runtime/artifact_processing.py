@@ -644,7 +644,13 @@ class ArtifactProcessingSupervisor:
                 state.reconcile_after, _DISCOVERY_PAGE_SIZE, fence=self._require_current_fence()
             )
             state.reconcile_complete = state.reconcile_after is None
-            if not state.reconcile_complete:
+            if getattr(binding.pending_provider, "continuous", False):
+                state.reconcile_complete = False
+                state.discovery_pending = True
+                state.next_discovery_at = loop.time() + (
+                    0.1 if state.reconcile_after is None else _DISCOVERY_PAGE_DELAY_SECONDS
+                )
+            elif not state.reconcile_complete:
                 state.next_discovery_at = loop.time() + _DISCOVERY_PAGE_DELAY_SECONDS
         else:
             state.reconcile_complete = True

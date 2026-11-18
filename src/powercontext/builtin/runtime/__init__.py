@@ -98,6 +98,12 @@ from powercontext.builtin.runtime.config import (
     InferenceConfig,
     RuntimeConfig,
 )
+from powercontext.builtin.runtime.context_pack import (
+    ContextPack,
+    ContextPackDelta,
+    ContextPackError,
+    apply_context_pack_delta,
+)
 from powercontext.builtin.runtime.decision_model import (
     DecisionKind,
     DecisionModel,
@@ -172,6 +178,7 @@ from powercontext.builtin.runtime.models import (
     SubmitSourceObservation,
     TopicMemoryFlushResult,
 )
+from powercontext.builtin.runtime.prepared_context import PreparedContextFragment
 from powercontext.builtin.runtime.protocols import PowerContextProvider, RemoteIngestion
 from powercontext.builtin.runtime.readiness import (
     CachedReadinessProbe,
@@ -231,6 +238,9 @@ __all__ = [
     "ConnectorCheckpointState",
     "ContextAssembly",
     "ContextAssemblySection",
+    "ContextPack",
+    "ContextPackDelta",
+    "ContextPackError",
     "CreateDreamRunRequest",
     "DatabaseConfig",
     "DecisionKind",
@@ -318,6 +328,7 @@ __all__ = [
     "PrepareContextRequest",
     "PrepareHandoff",
     "PreparedContext",
+    "PreparedContextFragment",
     "PreparedHandoff",
     "ProposeExperienceRequest",
     "ProposeSkillRequest",
@@ -378,6 +389,7 @@ __all__ = [
     "TopicMemoryProcessingUnavailableError",
     "UsageStatistics",
     "WorkApplication",
+    "apply_context_pack_delta",
     "build_memory_write_gate",
     "dependency_readiness_probe",
     "open_builtin_contexts",
